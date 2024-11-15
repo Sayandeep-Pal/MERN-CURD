@@ -19,7 +19,7 @@ mongoose.connect(
 );
 
 app.get("/" , (request, response) =>{
-  res.json("HELLO")
+  res.json("HELLO");
     UserModel.find({})
     .then((users) => response.json(users))
     .catch((err) => response.json(err));
