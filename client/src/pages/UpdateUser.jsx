@@ -9,7 +9,7 @@ const UpdateUser = () => {
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        axios.get(`http://mern-curd.vercel.app/getUser/${id}`)
+        axios.get(`https://mern-curd.vercel.app/getUser/${id}`)
             .then(res => {
                 console.log(res.data)
                 setName(res.data.name)
@@ -22,7 +22,7 @@ const UpdateUser = () => {
     const Update = (e) => {
         e.preventDefault()
 
-        axios.put("http://localhost:3000/update/"+id, {name, age, email })
+        axios.put("https://mern-curd.vercel.app/update/"+id, {name, age, email })
             .then(res => {
                 console.log(res)
                 window.location.href = '/'
