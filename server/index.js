@@ -4,8 +4,15 @@ const cors = require('cors');
 const UserModel = require("./models/Users.js")
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://mern-curd-frontend-alpha.vercel.app/"],
+    methods: ["post", 'get', 'put', 'delete'],
+    credentials: true
+  })
+);
 app.use(express.json());
+
 
 mongoose.connect(
   "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
