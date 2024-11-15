@@ -4,7 +4,7 @@ const cors = require('cors');
 const UserModel = require("./models/Users.js")
 
 const app = express();
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 
 
