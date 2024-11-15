@@ -1,16 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
-//const cors = require('cors');
+const cors = require('cors');
 const UserModel = require("./models/Users.js")
 
 const app = express();
-/*app.use(
+app.use(
   cors({
     origin: ["https://mern-curd-frontend-alpha.vercel.app"],
     methods: ["POST", 'GET'],
     credentials: true
   })
-);*/
+);
 app.use(express.json());
 
 
