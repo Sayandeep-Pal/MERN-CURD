@@ -9,7 +9,7 @@ const CreateUser = () => {
     const Submit = (e) =>{
         e.preventDefault()
 
-        axios.post("http://mern-curd.vercel.app/createUser",{name,age,email})
+        axios.post("https://mern-curd.vercel.app/createUser",{name,age,email})
         .then(res => {
             console.log(res)
             window.location.href = '/'
