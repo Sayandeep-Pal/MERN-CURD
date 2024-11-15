@@ -7,7 +7,7 @@ const app = express();
 app.use(
   cors({
     origin: ["https://mern-curd-frontend-alpha.vercel.app"],
-    methods: ["post", 'get', 'put', 'delete'],
+    methods: ["POST", 'GET', 'put', 'delete'],
     credentials: true
   })
 );
