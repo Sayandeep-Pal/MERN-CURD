@@ -4,7 +4,10 @@ const cors = require('cors');
 const UserModel = require("./models/Users.js")
 
 const app = express();
+
+
 app.use(cors());
+
 app.use(express.json());
 
 
@@ -13,6 +16,7 @@ mongoose.connect(
 );
 
 app.get("/" , (request, response) =>{
+  response.json("HELLO");
     UserModel.find({})
     .then((users) => response.json(users))
     .catch((err) => response.json(err));
