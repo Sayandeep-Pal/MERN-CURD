@@ -9,7 +9,7 @@ const UpdateUser = () => {
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        axios.get(`http://mern-curd.vercel.app/getUser/${id}`)
+        axios.get(`https://mern-curd.vercel.app/getUser/${id}`)
             .then(res => {
                 console.log(res.data)
                 setName(res.data.name)
