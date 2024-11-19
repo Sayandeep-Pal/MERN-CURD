@@ -11,7 +11,7 @@ const User = () => {
 
     const {id} = useParams();
     useEffect(() => {
-        axios.get(`${URL}`)
+        axios.get(`${URL}/user`)
         .then(res => setUsers(res.data))
         .catch(err => console.log(err))
     })

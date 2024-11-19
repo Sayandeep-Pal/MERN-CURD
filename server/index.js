@@ -42,7 +42,7 @@ mongoose
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Routes
-app.get("/", async (req, res) => {
+app.get("/user", async (req, res) => {
   try {
     const users = await UserModel.find({});
     res.json({ success: true, data: users });
