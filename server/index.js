@@ -42,6 +42,10 @@ mongoose
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Routes
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from the backend!" });
+});
+
 app.get("/user", async (req, res) => {
   try {
     const users = await UserModel.find({});
