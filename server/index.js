@@ -4,13 +4,7 @@ const cors = require('cors');
 const UserModel = require("./models/Users.js")
 
 const app = express();
-app.use(
-  cors({
-    origin: ["https://mern-curd-frontend-alpha.vercel.app/"],
-    methods: ["post", 'get', 'put', 'delete'],
-    credentials: true
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 

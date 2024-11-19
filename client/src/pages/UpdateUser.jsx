@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
 const UpdateUser = () => {
+
+    const URL = "https://mern-curd.vercel.app/";
 
     const { id } = useParams()
     const [name, setName] = useState('')
@@ -9,7 +12,7 @@ const UpdateUser = () => {
     const [email, setEmail] = useState('')
 
     useEffect(() => {
-        axios.get(`https://mern-curd.vercel.app/getUser/${id}`)
+        axios.get(`${URL}/getUser/${id}`)
             .then(res => {
                 console.log(res.data)
                 setName(res.data.name)
@@ -22,7 +25,7 @@ const UpdateUser = () => {
     const Update = (e) => {
         e.preventDefault()
 
-        axios.put("http://localhost:3000/update/"+id, {name, age, email })
+        axios.put(`${URL}/update/`+id, {name, age, email })
             .then(res => {
                 console.log(res)
                 window.location.href = '/'

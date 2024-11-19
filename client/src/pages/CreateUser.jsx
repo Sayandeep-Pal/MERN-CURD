@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+
 const CreateUser = () => {
+    const URL = "https://mern-curd.vercel.app/";
 
     const[name, setName] = useState()
     const[age, setAge] = useState()
@@ -9,7 +11,7 @@ const CreateUser = () => {
     const Submit = (e) =>{
         e.preventDefault()
 
-        axios.post("https://mern-curd.vercel.app/createUser",{name,age,email})
+        axios.post(`${URL}/createUser`,{name,age,email})
         .then(res => {
             console.log(res)
             window.location.href = '/'
@@ -20,7 +22,7 @@ const CreateUser = () => {
 
     return (
             <div className='d-flex vh-100 bg-primary justify-content-center aling-items-center'>
-                <div className='w-50 bg-dark rounded p-3 ' style={{margin: "170px"}}>
+                <div className='w-50 bg-dark rounded p-3 ' style={{margin: "0px"}}>
                     <form onSubmit={Submit}>
                         <h2 style={{color: "white"}}>Add User</h2>
                         <div className="mb-2">
