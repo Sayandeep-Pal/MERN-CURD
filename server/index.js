@@ -5,6 +5,9 @@ const cors = require("cors");
 const Joi = require("joi");
 const UserModel = require("./models/Users.js");
 
+const MONGO_URI =
+  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 const app = express();
 
 // app.use(cors({ origin: ["https://mern-curd-frontend-alpha.vercel.app"] }));
@@ -31,7 +34,7 @@ app.use(express.json());
 
 // Database Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
