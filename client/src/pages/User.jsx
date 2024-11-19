@@ -26,10 +26,11 @@ const User = () => {
             .catch(err => console.log(err))
     }
     return (
-        <div className='d-flex vh-100 bg-secondary justify-content-center aling-items-center'>
-            <div className='w-50  rounded p-1 '>
-                <Link to='/createUser' className='btn btn-success '>Add +</Link>
-                <table className='table' >
+        <div className='container'>
+            <div className='table-container'>
+                <h1 style={{color: 'whitesmoke'}}>User Table</h1>
+                <Link to='/createUser' className='btn-add'>Add +</Link>
+                <table className='user-table'>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -40,26 +41,23 @@ const User = () => {
                     </thead>
                     <tbody>
                         {
-
                             users.map((user) => {
-                                return <tr >
+                                return <tr key={user._id}>
                                     <td>{user.name}</td>
                                     <td>{user.age}</td>
                                     <td>{user.email}</td>
                                     <td>
-                                        <Link to={`/updateUser/${user._id}`} className='btn  '><MdEdit /></Link>
-                                        <Link onClick={(e) => handleDelete(user._id)} className='btn  '><MdDeleteForever /></Link>
+                                        <Link to={`/updateUser/${user._id}`} className='btn-edit'><MdEdit /></Link>
+                                        <button onClick={() => handleDelete(user._id)} className='btn-delete'><MdDeleteForever /></button>
                                     </td>
                                 </tr>
                             })
-
-
                         }
                     </tbody>
                 </table>
             </div>
-        </div>
+         </div>
     )
 }
 
-export default User
+export default User;

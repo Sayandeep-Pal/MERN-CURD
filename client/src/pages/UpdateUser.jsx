@@ -39,7 +39,7 @@ const UpdateUser = () => {
 
     return (
         <div className='d-flex vh-100 bg-primary justify-content-center aling-items-center'>
-            <div className='w-50 bg-dark rounded p-3 ' style={{ margin: "170px" }}>
+            <div className='w-50 bg-dark rounded p-3 ' style={{ margin: "20%" }}>
                 <form onSubmit={Update}>
                     <h2 style={{ color: 'white' }}>Update User</h2>
                     <div className="mb-2">
