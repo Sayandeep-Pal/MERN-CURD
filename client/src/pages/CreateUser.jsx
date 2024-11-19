@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const CreateUser = () => {
     const URL = "https://mern-curd.vercel.app";
+    // const URL = "http://localhost:3000";
 
     const[name, setName] = useState()
     const[age, setAge] = useState()

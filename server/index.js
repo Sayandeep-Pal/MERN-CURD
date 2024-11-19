@@ -1,122 +1,60 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
-const Joi = require("joi");
-const UserModel = require("./models/Users.js");
-
-const MONGO_URI =
-  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const cors = require('cors');
+const UserModel = require("./models/Users.js")
 
 const app = express();
 
-// app.use(cors({ origin: ["https://mern-curd-frontend-alpha.vercel.app"] }));
-// app.use(express.json());
 
-const allowedOrigins = [
-  "https://mern-curd-frontend-alpha.vercel.app", // Your frontend
-  "http://localhost:3000", // For local development
-];
+app.use(cors());
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
 app.use(express.json());
 
-// Database Connection
-mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// Routes
-app.get("/", (req, res) => {
-  res.json( "Hello from the backend!" );
-});
+mongoose.connect(
+  "mongodb+srv://sayandeep123:babusona@cluster0.0qugd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+);
 
-app.get("/user", async (req, res) => {
-  try {
-    const users = await UserModel.find({});
-    res.json({ success: true, data: users });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-app.get("/getUser/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const user = await UserModel.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.json({ success: true, data: user });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-const userSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
-  age: Joi.number().integer().min(0).max(120).required(),
-  email: Joi.string().email().required(),
-});
-
-app.post("/createUser", async (req, res) => {
-  const { error } = userSchema.validate(req.body);
-  if (error)
-    return res
-      .status(400)
-      .json({ success: false, error: error.details[0].message });
-
-  try {
-    const newUser = await UserModel.create(req.body);
-    res.status(201).json({ success: true, data: newUser });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-app.put("/update/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
-      new: true,
+app.get("/", (request, response) => {
+  UserModel.find({})
+    .then((users) => response.json(users)) // Send users as a response
+    .catch((err) => {
+      console.error(err); // Log the error for debugging
+      response.status(500).json({ error: "Internal Server Error" }); // Send an error response
     });
-    res.json({ success: true, data: updatedUser });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
 });
 
-app.delete("/deleteUser/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const deletedUser = await UserModel.findByIdAndDelete(id);
-    res.json({ success: true, data: deletedUser });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
 
-// 404 Route
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
-});
+app.get("/getUser/:id",(req,res) =>{
+    const id = req.params.id;
+    UserModel.findById({_id : id})
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+})
 
-// Start Server
+app.put("/update/:id", (req,res) =>{
+    const id = req.params.id;
+    UserModel.findOneAndUpdate(
+      { _id: id },
+      { name: req.body.name, age: req.body.age, email: req.body.email }
+    )
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+})
+
+app.post("/createUser", (request,response) => {
+    UserModel.create(request.body)
+    .then(users => response.json(users))
+    .catch(err => response.json(err))
+})
+
+app.delete("/deleteUser/:id", (req,res) =>{
+    const id = req.params.id
+    UserModel.findByIdAndDelete({ _id: id })
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+})
+
 app.listen(3000, () => {
-  console.log("Server is running on port 3000...");
+  console.log("Server is running...");
 });
