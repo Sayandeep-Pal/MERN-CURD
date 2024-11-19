@@ -43,7 +43,7 @@ mongoose
 
 // Routes
 app.get("/", (req, res) => {
-  res.json({ message: "Hello from the backend!" });
+  res.json( "Hello from the backend!" );
 });
 
 app.get("/user", async (req, res) => {
