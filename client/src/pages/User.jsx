@@ -5,7 +5,7 @@ import { MdDeleteForever,MdEdit } from "react-icons/md";
 
 const User = () => {
 
-    const URL = "https://mern-curd.vercel.app/";
+    const URL = "https://mern-curd.vercel.app";
 
     const [users, setUsers] = useState([])
 

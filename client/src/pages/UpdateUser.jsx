@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 const UpdateUser = () => {
 
-    const URL = "https://mern-curd.vercel.app/";
+    const URL = "https://mern-curd.vercel.app";
 
     const { id } = useParams()
     const [name, setName] = useState('')
