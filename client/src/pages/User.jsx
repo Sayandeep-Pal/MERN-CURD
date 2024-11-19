@@ -11,21 +11,13 @@ const User = () => {
 
     const {id} = useParams();
     useEffect(() => {
-<<<<<<< HEAD
         axios.get(`${URL}`)
-=======
-        axios.get("https://mern-curd.vercel.app")
->>>>>>> 0fb4038ce5ba15182693a41a77002ebbfbf9359e
         .then(res => setUsers(res.data))
         .catch(err => console.log(err))
     })
 
     const handleDelete = (id) =>{
-<<<<<<< HEAD
         axios.delete(`${URL}/deleteUser/`+id)
-=======
-        axios.delete("https://mern-curd.vercel.app/deleteUser/"+id)
->>>>>>> 0fb4038ce5ba15182693a41a77002ebbfbf9359e
         .then(res => {
             console.log(res)
             // window.location.reload()
